@@ -128,3 +128,25 @@ button:hover {
   list-style-type: none;
   font-weight: 500;
 }
+
+#promptOutput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+button[onclick="copyPrompt()"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[onclick="copyPrompt()"]:hover {
+  background-color: #512da8;
+}
