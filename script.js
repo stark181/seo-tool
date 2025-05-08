@@ -151,6 +151,10 @@ function analyzeTitle() {
       </div>
     `;
 
+    // 履歴保存と表示
+    saveHistory(title, totalScore);
+    displayHistory();
+
     // ローディング非表示
     document.getElementById('loading').style.display = 'none';
 
@@ -165,3 +169,24 @@ function copyPrompt() {
     alert("ChatGPT用プロンプトをコピーしました！");
   });
 }
+
+// 履歴を保存
+function saveHistory(title, score) {
+  const history = JSON.parse(localStorage.getItem('seoHistory')) || [];
+  const date = new Date().toLocaleString();
+  history.unshift({ title, score, date }); // 新しいものを先頭に
+  if (history.length > 10) history.pop();  // 最大10件まで
+  localStorage.setItem('seoHistory', JSON.stringify(history));
+}
+
+// 履歴を表示
+function displayHistory() {
+  const history = JSON.parse(localStorage.getItem('seoHistory')) || [];
+  const historyList = document.getElementById('historyList');
+  historyList.innerHTML = history.map(item =>
+    `<li><strong>${item.title}</strong>（${item.score}点｜${item.date}）</li>`
+  ).join('');
+}
+
+// ページ読み込み時に履歴表示
+window.onload = displayHistory;
