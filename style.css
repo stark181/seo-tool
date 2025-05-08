@@ -89,6 +89,7 @@ button:hover {
 .bar {
   height: 100%;
   border-radius: 5px;
+  transition: width 1s ease-out;
 }
 
 .bar-intent { 
@@ -174,16 +175,4 @@ button[onclick="copyPrompt()"]:hover {
   margin-top: 50px;
   font-size: 20px;
   color: #444;
-}
-
-/* バーのアニメーション */
-@keyframes growBar {
-  from { width: 0; }
-  to { width: var(--target-width); }
-}
-
-.bar {
-  height: 100%;
-  border-radius: 5px;
-  transition: width 1s ease-out;
 }
