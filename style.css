@@ -75,9 +75,17 @@ button:hover {
   border-radius: 5px;
 }
 
-.bar-intent { background-color: #4caf50; }  /* 緑 */
-.bar-ctr { background-color: #2196f3; }     /* 青 */
-.bar-expression { background-color: #ff9800; } /* オレンジ */
+.bar-intent { 
+  background: linear-gradient(90deg, #43cea2, #185a9d);  /* 緑→青グラデ */
+}
+
+.bar-ctr { 
+  background: linear-gradient(90deg, #36d1dc, #5b86e5);  /* 水色→青グラデ */
+}
+
+.bar-expression { 
+  background: linear-gradient(90deg, #ffb347, #ffcc33);  /* オレンジ→黄色グラデ */
+}
 
 /* アドバイス（グラデーションテキスト） */
 .good {
