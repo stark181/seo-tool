@@ -60,3 +60,21 @@ button:hover {
     width: 95%;
   }
 }
+
+.bar-container {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.bar-intent { background-color: #4caf50; }  /* 緑 */
+.bar-ctr { background-color: #2196f3; }     /* 青 */
+.bar-expression { background-color: #ff9800; } /* オレンジ */
