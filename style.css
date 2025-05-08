@@ -78,3 +78,19 @@ button:hover {
 .bar-intent { background-color: #4caf50; }  /* 緑 */
 .bar-ctr { background-color: #2196f3; }     /* 青 */
 .bar-expression { background-color: #ff9800; } /* オレンジ */
+
+/* アドバイスアイコン */
+.good { color: green; }
+.warn { color: orange; }
+
+/* ローディング用 */
+#loading {
+  display: none;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* スコアによって背景色変化 */
+.green-bg { background-color: #d0f0d0; }
+.yellow-bg { background-color: #fff5cc; }
+.red-bg { background-color: #f8d0d0; }
