@@ -76,15 +76,16 @@ button:hover {
 }
 
 .bar-intent { 
-  background: linear-gradient(90deg, #43cea2, #185a9d);  /* 緑→青グラデ */
+  background: linear-gradient(90deg, #00c853, #64dd17);  /* 緑グラデ */
 }
 
 .bar-ctr { 
-  background: linear-gradient(90deg, #36d1dc, #5b86e5);  /* 水色→青グラデ */
+  background: linear-gradient(90deg, #00bcd4, #2196f3);  /* 水色→青グラデ */
 }
 
 .bar-expression { 
-  background: linear-gradient(90deg, #ffb347, #ffcc33);  /* オレンジ→黄色グラデ */
+  background: linear-gradient(90deg, #ff9100, #ffc400);  /* オレンジ→黄色グラデ */
+}
 }
 
 /* アドバイス（グラデーションテキスト） */
