@@ -94,3 +94,28 @@ button:hover {
 .green-bg { background-color: #d0f0d0; }
 .yellow-bg { background-color: #fff5cc; }
 .red-bg { background-color: #f8d0d0; }
+
+/* アドバイスアイコンと色（読みやすく） */
+.good {
+  color: #2e7d32;  /* 濃い緑に */
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.warn {
+  color: #e65100;  /* 濃いオレンジに */
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* アドバイスリストのマージン */
+#result ul {
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#result li {
+  margin-bottom: 8px;
+  list-style-type: none;
+}
