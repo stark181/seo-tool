@@ -86,7 +86,6 @@ button:hover {
 .bar-expression { 
   background: linear-gradient(90deg, #ff9100, #ffc400);  /* オレンジ→黄色グラデ */
 }
-}
 
 /* アドバイス（グラデーションテキスト） */
 .good {
