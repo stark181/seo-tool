@@ -1,5 +1,4 @@
 function analyzeTitle() {
-  // ローディング表示
   document.getElementById('loading').style.display = 'block';
   document.getElementById('result').innerHTML = '';
 
@@ -9,6 +8,9 @@ function analyzeTitle() {
     let totalScore = 100;
     let advice = [];
     let searchIntent = 100, ctrFactors = 100, expression = 100;
+
+    // ---- 判定ロジック（省略せずそのまま使用中） ----
+    // （ここはあなたの元コード通り。省略しますがロジックは変わらず。）
 
     // ① 文字数
     if (title.length < 28) {
@@ -21,7 +23,6 @@ function analyzeTitle() {
       advice.push({msg: "適切な文字数です。", type: "good"});
     }
 
-    // ② メインキーワード
     const keywords = ["SEO", "検索", "初心者", "最新", "2025", "おすすめ"];
     let keywordFound = false;
     for (const kw of keywords) {
@@ -37,7 +38,6 @@ function analyzeTitle() {
       advice.push({msg: "主要キーワードが含まれています。", type: "good"});
     }
 
-    // ③ キャッチコピー語
     const catchyWords = ["比較", "ランキング", "完全", "簡単"];
     if (!catchyWords.some(w => title.includes(w))) {
       ctrFactors -= 10;
@@ -46,7 +46,6 @@ function analyzeTitle() {
       advice.push({msg: "キャッチワードが含まれています。", type: "good"});
     }
 
-    // ④ 禁止語
     const spamWords = ["最強", "絶対", "爆安", "衝撃"];
     if (spamWords.some(w => title.includes(w))) {
       totalScore -= 10; expression -= 10;
@@ -55,7 +54,6 @@ function analyzeTitle() {
       advice.push({msg: "誇張表現は含まれていません。", type: "good"});
     }
 
-    // ⑤ 検索意図との一致（共起語）
     const intentWords = ["順位", "改善", "Google", "方法", "解説"];
     if (!intentWords.some(w => title.includes(w))) {
       searchIntent -= 10;
@@ -64,7 +62,6 @@ function analyzeTitle() {
       advice.push({msg: "検索意図と一致しています。", type: "good"});
     }
 
-    // ⑥ CTR向上要素（数字）
     if (!title.match(/\d/)) {
       ctrFactors -= 10;
       advice.push({msg: "数字を含めましょう。", type: "warn"});
@@ -72,7 +69,6 @@ function analyzeTitle() {
       advice.push({msg: "数字が含まれています。", type: "good"});
     }
 
-    // ⑦ 感情ワード
     const emotionWords = ["簡単", "安全", "早い", "便利"];
     if (!emotionWords.some(w => title.includes(w))) {
       expression -= 5;
@@ -81,7 +77,6 @@ function analyzeTitle() {
       advice.push({msg: "ポジティブ表現が含まれています。", type: "good"});
     }
 
-    // ⑧ リズム（文字種バランス）
     const kanaRatio = (title.replace(/[^ぁ-んァ-ンー]/g, '').length / title.length);
     if (kanaRatio > 0.5) {
       expression -= 5;
@@ -90,7 +85,6 @@ function analyzeTitle() {
       advice.push({msg: "文字バランスは良好です。", type: "good"});
     }
 
-    // ⑨ 重複単語
     const words = title.split(/[\s　]/);
     const wordCount = {};
     words.forEach(w => { wordCount[w] = (wordCount[w] || 0) + 1; });
@@ -101,38 +95,34 @@ function analyzeTitle() {
       advice.push({msg: "単語の重複はありません。", type: "good"});
     }
 
-    // ⑩ 疑問形
     if (title.includes("とは") || title.includes("方法") || title.includes("なぜ")) {
       ctrFactors += 5;
     }
 
-    // スコア調整
     totalScore = Math.min(Math.max(totalScore, 0), 100);
     searchIntent = Math.min(Math.max(searchIntent, 0), 100);
     ctrFactors = Math.min(Math.max(ctrFactors, 0), 100);
     expression = Math.min(Math.max(expression, 0), 100);
 
-    // 背景色
     let bgClass = "";
     if (totalScore >= 80) bgClass = "green-bg";
     else if (totalScore >= 50) bgClass = "yellow-bg";
     else bgClass = "red-bg";
 
-    // バーのHTML（アニメーション対応）
     const barHTML = `
       <div>【検索意図】 ${searchIntent}点
         <div class="bar-container">
-          <div class="bar bar-intent" style="--target-width:${searchIntent}%; width:${searchIntent}%"></div>
+          <div class="bar bar-intent" id="barIntent"></div>
         </div>
       </div>
       <div>【CTR要素】 ${ctrFactors}点
         <div class="bar-container">
-          <div class="bar bar-ctr" style="--target-width:${ctrFactors}%; width:${ctrFactors}%"></div>
+          <div class="bar bar-ctr" id="barCTR"></div>
         </div>
       </div>
       <div>【表現・自然さ】 ${expression}点
         <div class="bar-container">
-          <div class="bar bar-expression" style="--target-width:${expression}%; width:${expression}%"></div>
+          <div class="bar bar-expression" id="barExpression"></div>
         </div>
       </div>
     `;
@@ -151,14 +141,19 @@ function analyzeTitle() {
       </div>
     `;
 
-    // 履歴保存と表示
+    // バーのアニメーション（widthを遅延セット）
+    setTimeout(() => {
+      document.getElementById('barIntent').style.width = `${searchIntent}%`;
+      document.getElementById('barCTR').style.width = `${ctrFactors}%`;
+      document.getElementById('barExpression').style.width = `${expression}%`;
+    }, 100); // 描画完了後に実行
+
     saveHistory(title, totalScore);
     displayHistory();
 
-    // ローディング非表示
     document.getElementById('loading').style.display = 'none';
 
-  }, 500); // 0.5秒の疑似ローディング
+  }, 500);
 }
 
 function copyPrompt() {
@@ -170,16 +165,14 @@ function copyPrompt() {
   });
 }
 
-// 履歴を保存
 function saveHistory(title, score) {
   const history = JSON.parse(localStorage.getItem('seoHistory')) || [];
   const date = new Date().toLocaleString();
-  history.unshift({ title, score, date }); // 新しいものを先頭に
-  if (history.length > 10) history.pop();  // 最大10件まで
+  history.unshift({ title, score, date });
+  if (history.length > 10) history.pop();
   localStorage.setItem('seoHistory', JSON.stringify(history));
 }
 
-// 履歴を表示
 function displayHistory() {
   const history = JSON.parse(localStorage.getItem('seoHistory')) || [];
   const historyList = document.getElementById('historyList');
@@ -188,5 +181,4 @@ function displayHistory() {
   ).join('');
 }
 
-// ページ読み込み時に履歴表示
 window.onload = displayHistory;
