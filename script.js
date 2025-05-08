@@ -118,21 +118,21 @@ function analyzeTitle() {
     else if (totalScore >= 50) bgClass = "yellow-bg";
     else bgClass = "red-bg";
 
-    // バーのHTML
+    // バーのHTML（アニメーション対応）
     const barHTML = `
       <div>【検索意図】 ${searchIntent}点
         <div class="bar-container">
-          <div class="bar bar-intent" style="width:${searchIntent}%;"></div>
+          <div class="bar bar-intent" style="--target-width:${searchIntent}%; width:${searchIntent}%"></div>
         </div>
       </div>
       <div>【CTR要素】 ${ctrFactors}点
         <div class="bar-container">
-          <div class="bar bar-ctr" style="width:${ctrFactors}%;"></div>
+          <div class="bar bar-ctr" style="--target-width:${ctrFactors}%; width:${ctrFactors}%"></div>
         </div>
       </div>
       <div>【表現・自然さ】 ${expression}点
         <div class="bar-container">
-          <div class="bar bar-expression" style="width:${expression}%;"></div>
+          <div class="bar bar-expression" style="--target-width:${expression}%; width:${expression}%"></div>
         </div>
       </div>
     `;
