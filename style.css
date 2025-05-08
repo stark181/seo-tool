@@ -1,18 +1,20 @@
 body {
   font-family: 'Helvetica Neue', 'Inter', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;  /* 白背景 */
+  background-color: #f7f8fa;  /* 全体の薄いグレー背景 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 h1 {
   color: #222;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 28px;
 }
 
 input {
@@ -28,7 +30,7 @@ input {
 button {
   padding: 12px 24px;
   font-size: 18px;
-  background: linear-gradient(90deg, #667eea, #764ba2);  /* 青→紫グラデ */
+  background: linear-gradient(90deg, #667eea, #764ba2);
   color: white;
   border: none;
   border-radius: 8px;
@@ -49,15 +51,29 @@ button:hover {
   text-align: left;
   width: 90%;
   max-width: 600px;
-  background-color: #ffffff;
+  background-color: #ffffff;  /* 完全白 */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.05);
 }
 
+#result h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
 @media (max-width: 600px) {
-  input, button, #result {
+  input, button, #result, #promptOutput {
     width: 95%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  #result h2 {
+    font-size: 20px;
   }
 }
 
@@ -76,15 +92,15 @@ button:hover {
 }
 
 .bar-intent { 
-  background: linear-gradient(90deg, #00c853, #64dd17);  /* 緑グラデ */
+  background: linear-gradient(90deg, #00c853, #64dd17);
 }
 
 .bar-ctr { 
-  background: linear-gradient(90deg, #00bcd4, #2196f3);  /* 水色→青グラデ */
+  background: linear-gradient(90deg, #00bcd4, #2196f3);
 }
 
 .bar-expression { 
-  background: linear-gradient(90deg, #ff9100, #ffc400);  /* オレンジ→黄色グラデ */
+  background: linear-gradient(90deg, #ff9100, #ffc400);
 }
 
 /* アドバイス（グラデーションテキスト） */
@@ -104,19 +120,15 @@ button:hover {
   line-height: 1.8;
 }
 
-/* ローディング用 */
 #loading {
   display: none;
   font-size: 18px;
   margin-top: 10px;
 }
 
-/* スコアによって背景色変化（透明感） */
-.green-bg { background-color: rgba(208, 240, 208, 0.2); }
-.yellow-bg { background-color: rgba(255, 245, 204, 0.2); }
-.red-bg { background-color: rgba(248, 208, 208, 0.2); }
+/* スコア背景色 → 完全白 */
+.green-bg, .yellow-bg, .red-bg { background-color: #ffffff; }
 
-/* アドバイスリストのマージン */
 #result ul {
   padding-left: 20px;
   margin-top: 10px;
@@ -129,7 +141,6 @@ button:hover {
   font-weight: 500;
 }
 
-/* ChatGPT用プロンプトの表示エリア */
 #promptOutput {
   padding: 10px;
   border: 1px solid #ccc;
@@ -140,21 +151,27 @@ button:hover {
   max-width: 600px;
 }
 
-/* ChatGPTボタン（同じbuttonスタイルなので個別にするならここを変更） */
 button[onclick="copyPrompt()"] {
   margin-top: 20px;
-  background: linear-gradient(90deg, #8e2de2, #4a00e0); /* パープル系グラデ */
+  background: linear-gradient(90deg, #8e2de2, #4a00e0);
 }
 
 button[onclick="copyPrompt()"]:hover {
   background: linear-gradient(90deg, #7b1fa2, #311b92);
 }
 
-/* 履歴リストデザイン */
+/* 履歴リスト（最後に表示） */
 #historyList li {
   margin-bottom: 8px;
   font-size: 16px;
   line-height: 1.6;
   padding-left: 10px;
   border-left: 3px solid #673ab7;
+}
+
+/* 履歴見出し */
+#historyTitle {
+  margin-top: 50px;
+  font-size: 20px;
+  color: #444;
 }
