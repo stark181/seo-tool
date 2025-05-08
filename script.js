@@ -156,3 +156,12 @@ function analyzeTitle() {
 
   }, 500); // 0.5秒の疑似ローディング
 }
+
+function copyPrompt() {
+  const title = document.getElementById('titleInput').value;
+  const promptText = `次のタイトルをSEOに最適化してください：${title}`;
+  document.getElementById('promptOutput').value = promptText;
+  navigator.clipboard.writeText(promptText).then(() => {
+    alert("ChatGPT用プロンプトをコピーしました！");
+  });
+}
