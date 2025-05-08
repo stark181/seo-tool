@@ -83,17 +83,34 @@ function analyzeTitle() {
   }
 
   // 最終スコアの調整
-  if (totalScore > 100) totalScore = 100;
-  if (totalScore < 0) totalScore = 0;
-  if (searchIntent < 0) searchIntent = 0;
-  if (ctrFactors < 0) ctrFactors = 0;
-  if (expression < 0) expression = 0;
+  totalScore = Math.min(Math.max(totalScore, 0), 100);
+  searchIntent = Math.min(Math.max(searchIntent, 0), 100);
+  ctrFactors = Math.min(Math.max(ctrFactors, 0), 100);
+  expression = Math.min(Math.max(expression, 0), 100);
 
+  // バーのHTML
+  const barHTML = `
+    <div>【検索意図】 ${searchIntent}点
+      <div class="bar-container">
+        <div class="bar bar-intent" style="width:${searchIntent}%;"></div>
+      </div>
+    </div>
+    <div>【CTR要素】 ${ctrFactors}点
+      <div class="bar-container">
+        <div class="bar bar-ctr" style="width:${ctrFactors}%;"></div>
+      </div>
+    </div>
+    <div>【表現・自然さ】 ${expression}点
+      <div class="bar-container">
+        <div class="bar bar-expression" style="width:${expression}%;"></div>
+      </div>
+    </div>
+  `;
+
+  // 結果表示
   document.getElementById('result').innerHTML = `
     <h2>総合スコア：${totalScore}点</h2>
-    <p>【検索意図】 ${searchIntent}点</p>
-    <p>【CTR要素】 ${ctrFactors}点</p>
-    <p>【表現・自然さ】 ${expression}点</p>
+    ${barHTML}
     <ul>${advice.map(a => `<li>${a}</li>`).join("")}</ul>
   `;
 }
